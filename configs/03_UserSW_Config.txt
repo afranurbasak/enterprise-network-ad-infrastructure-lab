@@ -1,0 +1,72 @@
+! =========================================================
+! LCW PROJESİ - USER SWITCH YAPILANDIRMA DOSYASI
+! Amaç: Departman bilgisayarlarını ilgili VLAN'lara atamak
+! =========================================================
+
+hostname User-SW
+
+vlan 10
+ name YONETIM
+vlan 20
+ name IK
+vlan 30
+ name MUHASEBE
+vlan 40
+ name SATIS
+vlan 50
+ name ETICARET
+vlan 60
+ name LOJISTIK
+vlan 70
+ name IT
+
+! Yönetim PC
+interface FastEthernet0/1
+ switchport mode access
+ switchport access vlan 10
+ no shutdown
+
+! IK PC
+interface FastEthernet0/2
+ switchport mode access
+ switchport access vlan 20
+ no shutdown
+
+! Muhasebe PC
+interface FastEthernet0/3
+ switchport mode access
+ switchport access vlan 30
+ no shutdown
+
+! Satış PC
+interface FastEthernet0/4
+ switchport mode access
+ switchport access vlan 40
+ no shutdown
+
+! E-Ticaret PC
+interface FastEthernet0/5
+ switchport mode access
+ switchport access vlan 50
+ no shutdown
+
+! Lojistik PC
+interface FastEthernet0/6
+ switchport mode access
+ switchport access vlan 60
+ no shutdown
+
+! IT PC
+interface FastEthernet0/7
+ switchport mode access
+ switchport access vlan 70
+ no shutdown
+
+! Core-SW bağlantısı
+interface GigabitEthernet0/1
+ switchport mode trunk
+ spanning-tree portfast trunk
+ no shutdown
+
+end
+write memory

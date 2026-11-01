@@ -1,0 +1,91 @@
+LCW PROJESİ - WINDOWS SERVER 2022 YAPILANDIRMA NOTLARI
+
+Sunucu Adı:
+LCW-DC01
+
+Domain:
+lcw.local
+
+Sunucu IP:
+192.168.80.10
+
+Subnet Mask:
+255.255.255.0
+
+Gateway:
+192.168.80.1
+
+DNS:
+192.168.80.10
+
+Kurulan Roller:
+- Active Directory Domain Services (AD DS)
+- DNS Server
+- DHCP Server
+- File and Storage Services
+- Group Policy Management
+- Windows Server Backup
+
+Active Directory OU Yapısı:
+- Yonetim
+- IK
+- Muhasebe
+- Satis
+- ETicaret
+- Lojistik
+- IT
+
+Örnek Kullanıcı:
+- Mehmet Demir
+- OU: Muhasebe
+
+Güvenlik Grupları:
+- GG_Yonetim
+- GG_IK
+- GG_Muhasebe
+- GG_Satis
+- GG_ETicaret
+- GG_Lojistik
+- GG_IT
+
+RBAC Örneği:
+Mehmet Demir kullanıcısı GG_Muhasebe grubuna eklenmiştir.
+Bu sayede Muhasebe klasörü üzerindeki yetkiler kullanıcıya grup üzerinden aktarılmıştır.
+
+DHCP:
+Örnek DHCP Scope:
+Scope Name: VLAN10-YONETIM
+Network: 192.168.10.0
+Gateway: 192.168.10.1
+
+DNS:
+Forward Lookup Zone:
+lcw.local
+
+A Kayıtları:
+lcw-dc01.lcw.local -> 192.168.80.10
+
+Dosya Paylaşımı:
+C:\Paylasimlar altında departman klasörleri oluşturulmuştur.
+
+Örnek:
+C:\Paylasimlar\Muhasebe
+
+Paylaşım:
+\\LCW-DC01\Muhasebe
+
+NTFS Yetkilendirme:
+GG_Muhasebe grubuna Muhasebe klasörü üzerinde gerekli erişim izinleri verilmiştir.
+Diğer departman kullanıcılarının erişimi sınırlandırılmıştır.
+
+Group Policy:
+GPO Adı:
+LCW-Password-Policy
+
+Ayarlar:
+- Minimum password length: 8 characters
+- Password complexity: Enabled
+
+Yedekleme:
+Windows Server Backup rolü kurulmuştur.
+Amaç: Veri kaybı, sistem arızası ve felaket kurtarma senaryolarına karşı altyapı hazırlamak.

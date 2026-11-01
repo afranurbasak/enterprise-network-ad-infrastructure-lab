@@ -1,0 +1,32 @@
+! =========================================================
+! LCW PROJESİ - SERVER SWITCH YAPILANDIRMA DOSYASI
+! Amaç: Sunucu VLAN'ı ve DMZ VLAN'ı port atamaları
+! =========================================================
+
+hostname Server-SW
+
+vlan 80
+ name SUNUCULAR
+vlan 90
+ name DMZ
+
+! LCW-DC01 sunucusu
+interface FastEthernet0/1
+ switchport mode access
+ switchport access vlan 80
+ no shutdown
+
+! WEB-DMZ sunucusu
+interface FastEthernet0/2
+ switchport mode access
+ switchport access vlan 90
+ no shutdown
+
+! Core-SW bağlantısı
+interface GigabitEthernet0/1
+ switchport mode trunk
+ spanning-tree portfast trunk
+ no shutdown
+
+end
+write memory

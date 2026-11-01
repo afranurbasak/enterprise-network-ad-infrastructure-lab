@@ -1,0 +1,47 @@
+! =========================================================
+! LCW PROJESİ - CORE SWITCH YAPILANDIRMA DOSYASI
+! Amaç: VLAN oluşturma ve trunk bağlantıları taşıma
+! =========================================================
+
+hostname Core-SW
+
+! VLAN TANIMLARI
+vlan 10
+ name YONETIM
+vlan 20
+ name IK
+vlan 30
+ name MUHASEBE
+vlan 40
+ name SATIS
+vlan 50
+ name ETICARET
+vlan 60
+ name LOJISTIK
+vlan 70
+ name IT
+vlan 80
+ name SUNUCULAR
+vlan 90
+ name DMZ
+
+! Router bağlantısı - Router-on-a-Stick için trunk
+interface FastEthernet0/24
+ switchport mode trunk
+ spanning-tree portfast trunk
+ no shutdown
+
+! User-SW bağlantısı
+interface GigabitEthernet0/1
+ switchport mode trunk
+ spanning-tree portfast trunk
+ no shutdown
+
+! Server-SW bağlantısı
+interface GigabitEthernet0/2
+ switchport mode trunk
+ spanning-tree portfast trunk
+ no shutdown
+
+end
+write memory

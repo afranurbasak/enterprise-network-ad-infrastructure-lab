@@ -1,0 +1,36 @@
+LCW PROJESİ - DHCP VE DNS ÖRNEK KOMUTLAR
+
+DHCP Scope Örneği:
+VLAN10-YONETIM
+Network: 192.168.10.0/24
+Gateway: 192.168.10.1
+DNS: 192.168.80.10
+
+PowerShell örneği:
+
+Add-DhcpServerv4Scope `
+ -Name "VLAN10-YONETIM" `
+ -StartRange 192.168.10.100 `
+ -EndRange 192.168.10.200 `
+ -SubnetMask 255.255.255.0
+
+Set-DhcpServerv4OptionValue `
+ -ScopeId 192.168.10.0 `
+ -Router 192.168.10.1 `
+ -DnsServer 192.168.80.10 `
+ -DnsDomain "lcw.local"
+
+DNS Zone:
+lcw.local
+
+DNS A Kaydı Örneği:
+
+Add-DnsServerResourceRecordA `
+ -Name "lcw-dc01" `
+ -ZoneName "lcw.local" `
+ -IPv4Address "192.168.80.10"
+
+Add-DnsServerResourceRecordA `
+ -Name "web-dmz" `
+ -ZoneName "lcw.local" `
+ -IPv4Address "192.168.90.10"
